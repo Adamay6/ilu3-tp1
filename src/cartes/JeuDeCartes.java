@@ -28,16 +28,41 @@ public class JeuDeCartes {
         typesDeCartes[18] = new Configuration(new Botte(Type.ACCIDENT), 1);
 	}
 
-	public String affichageJeuDeCartes() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("JEU :\n");
-        for (Configuration conf : typesDeCartes) {
-            if (conf != null) {
-                sb.append(conf.getNbExemplaires()).append(" ").append(conf.getCarte()).append("\n");
-            }
-        }
-        return sb.toString();
+    public String affichageJeuCartes() {
+    	StringBuilder sb = new StringBuilder();
+
+    	for(Configuration conf : typesDeCartes) {
+    		if(conf != null) {
+    			sb.append(conf.getNbExemplaires()).append(" ")
+    					.append(conf.getCarte()).append("\n");
+    		}
+    	}
+    	return sb.toString();
     }
+    
+	public boolean checkCount() {
+		Carte[] cartes = donnerCartes();
+		int totalAttendu = 0;
+
+		for(Configuration conf : typesDeCartes) {
+			if(conf != null) {
+				totalAttendu += conf.getNbExemplaires();
+				int compteur = 0;
+
+				for(Carte carte : cartes) {
+					if(conf.getCarte().equals(carte)) {
+						compteur++;
+					}
+				}
+
+				if(compteur != conf.getNbExemplaires()) {
+					return false;
+				}
+			}
+		}
+
+		return cartes.length == totalAttendu;
+	}
 	
 	private static class Configuration {
 		private int nbExemplaires;
