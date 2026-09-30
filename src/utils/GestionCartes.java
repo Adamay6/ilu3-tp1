@@ -35,7 +35,7 @@ public class GestionCartes {
 		List<T> resultat = new ArrayList<>();
 
 		while(!liste.isEmpty()) {
-			resultat.add(extraire(liste));
+			resultat.add(extraireV2(liste));
 		}
 
 		return resultat;
