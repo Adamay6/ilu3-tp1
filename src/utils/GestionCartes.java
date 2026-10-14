@@ -80,9 +80,21 @@ public class GestionCartes {
 	}
 
 	public static <T> List<T> rassemberV2(List<T> liste) {
-		return rassembler(liste);
-	}
+	    List<T> resultat = new ArrayList<>();
 
+	    for (T element : liste) {
+	        if (!resultat.contains(element)) {
+	            int nb = Collections.frequency(liste, element);
+
+	            for (int i = 0; i < nb; i++) {
+	                resultat.add(element);
+	            }
+	        }
+	    }
+
+	    return resultat;
+	}
+	
 	public static <T> boolean verifierRassemblement(List<T> liste) {
 		ListIterator<T> iterateur = liste.listIterator();
 
